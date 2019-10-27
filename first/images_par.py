@@ -42,10 +42,13 @@ if __name__ == '__main__':
 			iA.append((rA + gA + bA) // 3)
 			iB.append((rB + gB + bB) // 3)
 
-	gpu_imageA_intensity = cuda.mem_alloc(iA.nbytes) # allocation of device memory iA
-	gpu_imageB_intensity = cuda.mem_alloc(iB.nbytes) # allocation of device memory iB
-	cuda.memcpy_htod(gpu_imageA_intensity, iA) # host (CPU) to device (GPU) for iA
-	cuda.memcpy_htod(gpu_imageB_intensity, iB) # host (CPU) to device (GPU) for iB
+	iA_to_numpy = numpy.asarray(iA)
+	iB_to_numpy = numpy.asarray(iB)
+
+	gpu_imageA_intensity = cuda.mem_alloc(iA_to_numpy.nbytes) # allocation of device memory iA
+	gpu_imageB_intensity = cuda.mem_alloc(iB_to_numpy.nbytes) # allocation of device memory iB
+	cuda.memcpy_htod(gpu_imageA_intensity, iA_to_numpy) # host (CPU) to device (GPU) for iA
+	cuda.memcpy_htod(gpu_imageB_intensity, iB_to_numpy) # host (CPU) to device (GPU) for iB
 
 	function = kernel_func.get_function("halftone_substraction")
 
