@@ -36,9 +36,9 @@ if __name__ == '__main__':
 
 	for i in range(width):
 		for j in range(height):
-			rA, rB = pixA[i, j][0], pixB[i, j][0]
-			gA, gB = pixA[i, j][1], pixB[i, j][1]
-			bA, bB = pixA[i, j][2], pixB[i, j][2]
+			rA, rB = imageA[i][j][0], imageB[i][j][0]
+			gA, gB = imageA[i][j][1], imageB[i][j][1]
+			bA, bB = imageA[i][j][2], imageB[i][j][2]
 			iA.append((rA + gA + bA) // 3)
 			iB.append((rB + gB + bB) // 3)
 
